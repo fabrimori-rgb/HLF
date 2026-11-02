@@ -68,7 +68,7 @@ def colocar_barcos(tablero):
                         else (fila + paso, columna)
                         for paso in range(longitud)]
 
-                    if all(tablero_prueba[f, c] == v.AGUA
+                    if all(tablero_prueba[f, c] == variables.AGUA
                            for f, c in casillas):
                         opciones.append(casillas)
 
@@ -77,7 +77,7 @@ def colocar_barcos(tablero):
                 break
 
             for fila, columna in random.choice(opciones):
-                tablero_prueba[fila, columna] = v.BARCO
+                tablero_prueba[fila, columna] = variables.BARCO
 
         if colocacion_completa:
             return tablero_prueba
