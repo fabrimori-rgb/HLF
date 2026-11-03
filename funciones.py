@@ -1,7 +1,7 @@
 import numpy as np
 import variables as v
 
-def crear_tablero(tamano=variables.TAMANO_TABLERO):
+def crear_tablero(tamano=v.TAMANO_TABLERO):
     tablero = np.full((tamano, tamano), v.AGUA, dtype=str)
     return tablero
 
