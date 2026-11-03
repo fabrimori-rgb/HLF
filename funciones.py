@@ -1,8 +1,8 @@
 import numpy as np
-import variables
+import variables as v
 
 def crear_tablero(tamano=variables.TAMANO_TABLERO):
-    tablero = np.full((tamano, tamano), variables.AGUA, dtype=str)
+    tablero = np.full((tamano, tamano), v.AGUA, dtype=str)
     return tablero
 
 #funcion para crear el tablero con numero de filas y columnas
@@ -47,7 +47,7 @@ def colocar_barcos(tablero):
 
     for intento in range(100):
         tablero_prueba = tablero.copy()
-        tablero_prueba[:] = variables.AGUA
+        tablero_prueba[:] = v.AGUA
         colocacion_completa = True
 
         for longitud in esloras:
@@ -68,7 +68,7 @@ def colocar_barcos(tablero):
                         else (fila + paso, columna)
                         for paso in range(longitud)]
 
-                    if all(tablero_prueba[f, c] == variables.AGUA
+                    if all(tablero_prueba[f, c] == v.AGUA
                            for f, c in casillas):
                         opciones.append(casillas)
 
@@ -77,7 +77,7 @@ def colocar_barcos(tablero):
                 break
 
             for fila, columna in random.choice(opciones):
-                tablero_prueba[fila, columna] = variables.BARCO
+                tablero_prueba[fila, columna] = v.BARCO
 
         if colocacion_completa:
             return tablero_prueba
@@ -123,21 +123,21 @@ def turno_disparo_jugador(tablero_rival_flota, tablero_jugador_disparos):
                 print("⚠️ Coordenadas fuera de rango. Inténtalo de nuevo.")
                 continue
                 
-            if tablero_jugador_disparos[f, c] != variables.AGUA:
+            if tablero_jugador_disparos[f, c] != v.AGUA:
                 print("⚠️ Ya has disparado en esta casilla. Elige otra.")
                 print(tablero_jugador_disparos)
                 continue
                 
             # Evaluar impacto en la flota rival
-            if tablero_rival_flota[f, c] == variables.BARCO:
-                tablero_rival_flota[f, c] = variables.TOCADO
-                tablero_jugador_disparos[f, c] = variables.TOCADO
+            if tablero_rival_flota[f, c] == v.BARCO:
+                tablero_rival_flota[f, c] = v.TOCADO
+                tablero_jugador_disparos[f, c] = v.TOCADO
                 print("\n🎯 ¡IMPACTO! ¡Has tocado un barco enemigo!")
                 print(tablero_jugador_disparos)
                 return "tocado"
             else:
-                tablero_rival_flota[f, c] = variables.AGUA_DISPARO
-                tablero_jugador_disparos[f, c] = variables.AGUA_DISPARO
+                tablero_rival_flota[f, c] = v.AGUA_DISPARO
+                tablero_jugador_disparos[f, c] = v.AGUA_DISPARO
                 print("\n🌊 ¡Agua! Has fallado el disparo.")
                 print(tablero_jugador_disparos)
                 return "agua"
@@ -157,20 +157,20 @@ def turno_disparo_rival(tablero_jugador_flota, tablero_rival_disparos):
         c = random.randint(0, columnas - 1)
         
         # Comprobar que la máquina no repita disparo en la misma casilla
-        if tablero_rival_disparos[f, c] == variables.AGUA:
+        if tablero_rival_disparos[f, c] == v.AGUA:
             break
             
     print(f"\n🤖 El rival (máquina) dispara a la coordenada: Fila {f}, Columna {c}")
     
-    if tablero_jugador_flota[f, c] == variables.BARCO:
-        tablero_jugador_flota[f, c] = variables.TOCADO
-        tablero_rival_disparos[f, c] = variables.TOCADO
+    if tablero_jugador_flota[f, c] == v.BARCO:
+        tablero_jugador_flota[f, c] = v.TOCADO
+        tablero_rival_disparos[f, c] = v.TOCADO
         print("💥 ¡La máquina ha tocado uno de tus barcos!")
         return "tocado"
         print(tablero_rival_disparos)
     else:
-        tablero_jugador_flota[f, c] = variables.AGUA_DISPARO
-        tablero_rival_disparos[f, c] = variables.AGUA_DISPARO
+        tablero_jugador_flota[f, c] = v.AGUA_DISPARO
+        tablero_rival_disparos[f, c] = v.AGUA_DISPARO
         print("💨 La máquina ha disparado al agua.")
         return "agua"
         print(tablero_rival_disparos)
