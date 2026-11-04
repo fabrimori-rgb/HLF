@@ -42,7 +42,7 @@ if __name__ == "__main__":
 import random
 
 def colocar_barcos(tablero):
-    esloras = [2, 2, 2, 3, 3, 4]
+    esloras = v.ESLORA_BARCO
     filas, columnas = tablero.shape
 
     for intento in range(100):
@@ -166,11 +166,13 @@ def turno_disparo_rival(tablero_jugador_flota, tablero_rival_disparos):
         tablero_jugador_flota[f, c] = v.TOCADO
         tablero_rival_disparos[f, c] = v.TOCADO
         print("💥 ¡La máquina ha tocado uno de tus barcos!")
-        return "tocado"
         print(tablero_rival_disparos)
+        return "tocado"
+        
     else:
         tablero_jugador_flota[f, c] = v.AGUA_DISPARO
         tablero_rival_disparos[f, c] = v.AGUA_DISPARO
         print("💨 La máquina ha disparado al agua.")
-        return "agua"
         print(tablero_rival_disparos)
+        return "agua"
+        

@@ -1,3 +1,10 @@
+from funciones import (
+    colocar_barcos,
+    crear_tablero,
+    turno_disparo_jugador,
+    turno_disparo_rival,
+)
+
 if __name__ == "__main__":
     print("🚢 ¡BIENVENIDO A HUNDIR LA FLOTA! 🚢\n")
     
